@@ -1,0 +1,47 @@
+<?php
+/**
+ * @var NewBlock $block
+ */
+
+use SimpleField\HomeModule\Block\Html\NewBlock;
+
+$kosten = $block->getKostenloser();
+$express = $block->getExpress();
+$number = $block->getNumber();
+$cssClass = $block->getCssClass()
+?>
+
+<div>
+    <strong><?php echo $kosten ?></strong>
+    <strong><?php echo $express ?></strong>
+    <div id="downup" class="down">
+        <strong><?php echo $number?>  </strong>
+        <strong><a class="link" href="codetain/page/helloworld">HelloWorld</a></strong>
+        <ul class="menu" id="support" data-dropdown-menu="true" data-mage-init='{"down":{}}'>
+            <strong><span class="drop" id="drop1">HILFE & KONTAKT</span></strong>
+            <ul id="downup1" class="downup">
+                <li><a href="">Kontakt</a></li>
+                <li><a href="">Newsletter</a></li>
+                <li><a href="">Zahlungsarten</a></li>
+            </ul>
+        </ul>
+        <ul class="menu" id="lang" data-dropdown-menu="true" data-mage-init='{"down":{}}'>
+            <strong><span class="drop" id="drop2" >LANGUAGE</span></strong>
+            <ul id="downup2" class="downup">
+                <li><a href="">Polish</a></li>
+                <li><a href="">German</a></li>
+                <li><a href="">English</a></li>
+            </ul>
+        </ul>
+    </div>
+</div>
+
+<!--<script type="text/x-magento-init">-->
+<!--    {-->
+<!--          "#downup": {-->
+<!--            "down":{}-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+
+
