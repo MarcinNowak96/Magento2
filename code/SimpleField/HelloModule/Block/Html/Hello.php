@@ -2,29 +2,55 @@
 
 namespace SimpleField\HelloModule\Block\Html;
 
+use Magento\Backend\Block\Template\Context;
+use Magento\Catalog\Api\Data\ProductInterface;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Template;
+use SimpleField\HelloModule\Helper\Data;
 
 class Hello extends Template
 {
-    protected $_template = 'SimpleField_HelloModule::custom.phtml';
-    protected $_productCollectionFactory;
+    protected $template = 'SimpleField_HelloModule::custom.phtml';
+    protected $productCollectionFactory;
+    protected $cofigData;
+    /**
+     * @var ProductRepositoryInterface
+     */
+    protected $productRepository;
+
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    protected $_searchCriteriaBuilder;
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
 
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        Context $context,
+        ProductRepositoryInterface $productRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        Data $cofigData,
         array $data = []
     ) {
-        $this->_productCollectionFactory = $productCollectionFactory;
+        $this->productRepository = $productRepository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->cofigData = $cofigData;
         parent::__construct($context, $data);
     }
-
-    public function getProductCollection()
+    /**
+     * @return ProductInterface[]
+     */
+    public function getAllProducts()
     {
-        $collection = $this->_productCollectionFactory->create();
-        $collection->addFieldToSelect('*');
-        return $collection;
+        $searchCriteria = $this->searchCriteriaBuilder->create();
+        return $this->productRepository->getList($searchCriteria)->getItems();
     }
-
-
+    public function getDataSet()
+    {
+        return $this->cofigData->getGeneralConfig();
+    }
 
 }

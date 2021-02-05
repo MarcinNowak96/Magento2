@@ -5,16 +5,24 @@
 
 use SimpleField\HelloModule\Block\Html\Hello;
 
-$productCollection = $block->getProductCollection();
+$config = $block->getDataSet();
+$test = $block->getAllProducts();
 ?>
+
+
+<?php if ($config == 1) : ?>
+
 <table style="border:2px solid black;">
     <tr>
-        <th>Nazwa</th><th>Cena</th>
+        <th>Nazwa</th>
+        <th>Cena</th>
     </tr>
-    <?php foreach ($productCollection as $product) { ?>
+    <?php foreach ($test as $product) : ?>
         <tr>
-            <td><?php echo $product->getName()?></td>
-            <td><?php echo $product->getPrice()?></td>
+            <td><?php echo $product->getName() ?></td>
+            <td><?php echo $product->getPrice() ?></td>
         </tr>
-    <?php } ?>
+    <?php endforeach; ?>
 </table>
+
+<?php else: echo "Zaznacz YES w konfiguracji, aby zobaczyc liste produktów"; endif;?>

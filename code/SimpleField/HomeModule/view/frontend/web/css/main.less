@@ -1,0 +1,37 @@
+@width: auto;
+@max-height: 40px;
+@float: right;
+@color-black:black;
+@color-white:white;
+@ten:10;
+@none: none;
+.panel.header{
+    max-height: @max-height;
+}
+
+div.down {
+    width: @width;
+    float: @float;
+}
+ul {
+    float: @float;
+}
+
+ul.downup {
+    z-index: @ten;
+    display: @none;
+    position: absolute;
+    background-color: @color-white;
+    min-width: 100px;
+    padding: unset;
+}
+.downup a {
+    color: @color-black;
+    text-decoration: @none;
+    display: block;
+    padding: 10px;
+}
+a.link {
+    padding-left: 30px;
+    color: @color-white;
+}
